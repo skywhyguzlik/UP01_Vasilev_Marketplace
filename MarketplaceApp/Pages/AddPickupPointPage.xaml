@@ -1,0 +1,53 @@
+<Page x:Class="MarketplaceApp.Pages.AddPickupPointPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:classes="clr-namespace:MarketplaceApp.Classes"
+      Title="Пункт выдачи">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Border Style="{DynamicResource Card}" Width="720" Margin="20" HorizontalAlignment="Center">
+            <StackPanel>
+                <TextBlock x:Name="HeaderText" Style="{DynamicResource TitleText}" HorizontalAlignment="Center"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/><RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/><RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Город *" Style="{DynamicResource FieldLabel}"/>
+                    <TextBox x:Name="TBCity" Grid.Row="0" Grid.Column="1"
+                             Text="{Binding City, UpdateSourceTrigger=PropertyChanged}"
+                             Tag="Например: Москва" ToolTip="Название города (только буквы)"
+                             MaxLength="50" classes:InputMask.Mode="Letters"/>
+
+                    <TextBlock Grid.Row="1" Text="Адрес *" Style="{DynamicResource FieldLabel}"/>
+                    <TextBox x:Name="TBAddress" Grid.Row="1" Grid.Column="1"
+                             Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}"
+                             Tag="ул. Профсоюзная, д. 56" ToolTip="Улица и дом" MaxLength="255"/>
+
+                    <TextBlock Grid.Row="2" Text="Режим работы *" Style="{DynamicResource FieldLabel}"/>
+                    <TextBox x:Name="TBWorkHours" Grid.Row="2" Grid.Column="1"
+                             Text="{Binding WorkHours, UpdateSourceTrigger=PropertyChanged}"
+                             Tag="09:00–21:00" ToolTip="Время работы в формате 09:00–21:00" MaxLength="11"/>
+
+                    <TextBlock Grid.Row="3" Text="Телефон *" Style="{DynamicResource FieldLabel}"/>
+                    <TextBox x:Name="TBPhone" Grid.Row="3" Grid.Column="1"
+                             Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}"
+                             Tag="+7 (495) 120-11-01" ToolTip="Телефон пункта выдачи"
+                             MaxLength="20" classes:InputMask.Mode="Phone"/>
+                </Grid>
+
+                <TextBlock Text="* — обязательные поля" Style="{DynamicResource InfoText}"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="ButtonSave" Content="Сохранить" Style="{DynamicResource MainButton}"
+                            ToolTip="Сохранить изменения" Click="ButtonSave_Click"/>
+                    <Button x:Name="ButtonClean" Content="Очистить" Style="{DynamicResource SecondaryButton}"
+                            ToolTip="Очистить поля формы" Click="ButtonClean_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</Page>

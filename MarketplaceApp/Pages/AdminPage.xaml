@@ -1,0 +1,44 @@
+<Page x:Class="MarketplaceApp.Pages.AdminPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Панель администратора">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Border Style="{DynamicResource Card}" Margin="20" MaxWidth="900"
+                HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel>
+                <TextBlock x:Name="GreetingText" Style="{DynamicResource TitleText}" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="StatsText" Style="{DynamicResource InfoText}" HorizontalAlignment="Center"
+                           TextAlignment="Center"/>
+
+                <TextBlock Text="Работа с таблицами" Style="{DynamicResource SubTitleText}"
+                           HorizontalAlignment="Center" Margin="6,16,6,6"/>
+                <WrapPanel HorizontalAlignment="Center">
+                    <Button x:Name="BtnUsers" Content="Пользователи" Style="{DynamicResource MainButton}"
+                            ToolTip="Таблица пользователей и их ролей" Click="BtnUsers_Click"/>
+                    <Button x:Name="BtnSellers" Content="Продавцы" Style="{DynamicResource MainButton}"
+                            ToolTip="Таблица магазинов продавцов" Click="BtnSellers_Click"/>
+                    <Button x:Name="BtnCategories" Content="Категории" Style="{DynamicResource MainButton}"
+                            ToolTip="Таблица категорий товаров" Click="BtnCategories_Click"/>
+                    <Button x:Name="BtnProducts" Content="Товары" Style="{DynamicResource MainButton}"
+                            ToolTip="Таблица товаров и модерация" Click="BtnProducts_Click"/>
+                    <Button x:Name="BtnPickupPoints" Content="Пункты выдачи" Style="{DynamicResource MainButton}"
+                            ToolTip="Таблица пунктов выдачи заказов" Click="BtnPickupPoints_Click"/>
+                    <Button x:Name="BtnOrders" Content="Заказы" Style="{DynamicResource MainButton}"
+                            ToolTip="Таблица заказов и смена статусов" Click="BtnOrders_Click"/>
+                    <Button x:Name="BtnOrderItems" Content="Состав заказов" Style="{DynamicResource MainButton}"
+                            ToolTip="Таблица позиций заказов" Click="BtnOrderItems_Click"/>
+                    <Button x:Name="BtnReviews" Content="Отзывы" Style="{DynamicResource MainButton}"
+                            ToolTip="Таблица отзывов и их модерация" Click="BtnReviews_Click"/>
+                </WrapPanel>
+
+                <TextBlock Text="Аналитика" Style="{DynamicResource SubTitleText}"
+                           HorizontalAlignment="Center" Margin="6,16,6,6"/>
+                <Button x:Name="BtnDiagram" Content="Диаграммы и отчёты"
+                        Style="{DynamicResource SecondaryButton}"
+                        HorizontalAlignment="Center"
+                        ToolTip="Диаграмма покупок, экспорт в Word, PDF и Excel"
+                        Click="BtnDiagram_Click"/>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</Page>

@@ -1,0 +1,45 @@
+<Page x:Class="MarketplaceApp.Pages.DiagrammPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:charts="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization"
+      Title="Диаграммы и отчёты">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        
+        <Border Grid.Row="0" Style="{DynamicResource FilterBar}">
+            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="Покупатель:" Style="{DynamicResource FieldLabel}"/>
+                <ComboBox x:Name="CmbUser" Width="260" DisplayMemberPath="FIO"
+                          ToolTip="Чьи покупки показать на диаграмме"
+                          SelectionChanged="UpdateChart"/>
+                <TextBlock Text="Тип диаграммы:" Style="{DynamicResource FieldLabel}"/>
+                <ComboBox x:Name="CmbDiagram" Width="180"
+                          ToolTip="Вид диаграммы"
+                          SelectionChanged="UpdateChart"/>
+                <Button x:Name="BtnExportWord" Content="Экспорт в Word" Style="{DynamicResource MainButton}"
+                        ToolTip="Отчёт по всем покупателям: файлы .docx и .pdf"
+                        Click="BtnExportWord_Click"/>
+                <Button x:Name="BtnExportExcel" Content="Экспорт в Excel" Style="{DynamicResource MainButton}"
+                        ToolTip="Отчёт по всем покупателям: файл .xlsx"
+                        Click="BtnExportExcel_Click"/>
+            </WrapPanel>
+        </Border>
+
+        
+        <WindowsFormsHost Grid.Row="1" Margin="10">
+            <charts:Chart x:Name="ChartPayments">
+                <charts:Chart.Legends>
+                    <charts:Legend>
+                    </charts:Legend>
+                </charts:Chart.Legends>
+            </charts:Chart>
+        </WindowsFormsHost>
+
+        <TextBlock x:Name="InfoText" Grid.Row="2" Style="{DynamicResource InfoText}" HorizontalAlignment="Center"/>
+    </Grid>
+</Page>

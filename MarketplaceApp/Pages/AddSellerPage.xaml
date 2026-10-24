@@ -1,0 +1,78 @@
+<Page x:Class="MarketplaceApp.Pages.AddSellerPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:classes="clr-namespace:MarketplaceApp.Classes"
+      Title="Продавец">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Border Style="{DynamicResource Card}" Width="720" Margin="20" HorizontalAlignment="Center">
+            <StackPanel>
+                <TextBlock x:Name="HeaderText" Style="{DynamicResource TitleText}" HorizontalAlignment="Center"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Владелец *" Style="{DynamicResource FieldLabel}"/>
+                    <ComboBox x:Name="CBUser" Grid.Row="0" Grid.Column="1"
+                              DisplayMemberPath="FIO" SelectedValuePath="UserId" SelectedValue="{Binding UserId}"
+                              ToolTip="Пользователь с ролью «Продавец», у которого ещё нет магазина"/>
+
+                    <TextBlock Grid.Row="1" Text="Название магазина *" Style="{DynamicResource FieldLabel}"/>
+                    <TextBox x:Name="TBShopName" Grid.Row="1" Grid.Column="1"
+                             Text="{Binding ShopName, UpdateSourceTrigger=PropertyChanged}"
+                             Tag="Например: ТехноМир" ToolTip="Название магазина на маркетплейсе" MaxLength="100"/>
+
+                    <TextBlock Grid.Row="2" Text="Компания *" Style="{DynamicResource FieldLabel}"/>
+                    <TextBox x:Name="TBCompany" Grid.Row="2" Grid.Column="1"
+                             Text="{Binding CompanyName, UpdateSourceTrigger=PropertyChanged}"
+                             Tag="Например: ООО «ТехноМир»" ToolTip="Юридическое название компании или ИП" MaxLength="150"/>
+
+                    <TextBlock Grid.Row="3" Text="ИНН *" Style="{DynamicResource FieldLabel}"/>
+                    <TextBox x:Name="TBInn" Grid.Row="3" Grid.Column="1"
+                             Text="{Binding INN, UpdateSourceTrigger=PropertyChanged}"
+                             Tag="10 цифр для компании или 12 для ИП" ToolTip="ИНН: только цифры"
+                             MaxLength="12" classes:InputMask.Mode="Digits"/>
+
+                    <TextBlock Grid.Row="4" Text="Юридический адрес *" Style="{DynamicResource FieldLabel}"/>
+                    <TextBox x:Name="TBAddress" Grid.Row="4" Grid.Column="1"
+                             Text="{Binding LegalAddress, UpdateSourceTrigger=PropertyChanged}"
+                             Tag="г. Москва, ул. Тверская, д. 12" ToolTip="Юридический адрес" MaxLength="255"/>
+
+                    <TextBlock Grid.Row="5" Text="Комиссия, % *" Style="{DynamicResource FieldLabel}"/>
+                    <TextBox x:Name="TBCommission" Grid.Row="5" Grid.Column="1"
+                             Text="{Binding CommissionPercent, UpdateSourceTrigger=PropertyChanged}"
+                             Tag="От 0 до 50" ToolTip="Комиссия маркетплейса от 0 до 50 %"
+                             MaxLength="6" classes:InputMask.Mode="Decimal"/>
+
+                    <TextBlock Grid.Row="6" Text="Рейтинг *" Style="{DynamicResource FieldLabel}"/>
+                    <TextBox x:Name="TBRating" Grid.Row="6" Grid.Column="1"
+                             Text="{Binding Rating, UpdateSourceTrigger=PropertyChanged}"
+                             Tag="От 0 до 5" ToolTip="Рейтинг продавца от 0 до 5"
+                             MaxLength="4" classes:InputMask.Mode="Decimal"/>
+
+                    <TextBlock Grid.Row="7" Text="Дата регистрации *" Style="{DynamicResource FieldLabel}"/>
+                    <DatePicker x:Name="DPDate" Grid.Row="7" Grid.Column="1"
+                                SelectedDate="{Binding RegistrationDate}" ToolTip="Дата регистрации магазина"/>
+
+                    <CheckBox Grid.Row="8" Grid.Column="1" Content="Продавец проверен"
+                              IsChecked="{Binding IsVerified}" ToolTip="Документы продавца проверены"/>
+                </Grid>
+
+                <TextBlock Text="* — обязательные поля. Владельца сначала добавьте в таблицу «Пользователи» с ролью «Продавец»."
+                           Style="{DynamicResource InfoText}"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="ButtonSave" Content="Сохранить" Style="{DynamicResource MainButton}"
+                            ToolTip="Сохранить изменения" Click="ButtonSave_Click"/>
+                    <Button x:Name="ButtonClean" Content="Очистить" Style="{DynamicResource SecondaryButton}"
+                            ToolTip="Очистить поля формы" Click="ButtonClean_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</Page>

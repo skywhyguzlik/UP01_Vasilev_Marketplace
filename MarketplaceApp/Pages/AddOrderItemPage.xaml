@@ -1,0 +1,58 @@
+<Page x:Class="MarketplaceApp.Pages.AddOrderItemPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:classes="clr-namespace:MarketplaceApp.Classes"
+      Title="Позиция заказа">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Border Style="{DynamicResource Card}" Width="720" Margin="20" HorizontalAlignment="Center">
+            <StackPanel>
+                <TextBlock x:Name="HeaderText" Style="{DynamicResource TitleText}" HorizontalAlignment="Center"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/><RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/><RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Заказ *" Style="{DynamicResource FieldLabel}"/>
+                    <ComboBox x:Name="CBOrder" Grid.Row="0" Grid.Column="1"
+                              DisplayMemberPath="DisplayName" SelectedValuePath="OrderId"
+                              SelectedValue="{Binding OrderId}" ToolTip="Заказ, в который добавляется товар"/>
+
+                    <TextBlock Grid.Row="1" Text="Товар *" Style="{DynamicResource FieldLabel}"/>
+                    <ComboBox x:Name="CBProduct" Grid.Row="1" Grid.Column="1"
+                              DisplayMemberPath="ProductName" SelectedValuePath="ProductId"
+                              SelectedValue="{Binding ProductId}" ToolTip="Выберите товар"
+                              SelectionChanged="CBProduct_SelectionChanged"/>
+
+                    <TextBlock Grid.Row="2" Text="Количество, шт. *" Style="{DynamicResource FieldLabel}"/>
+                    <TextBox x:Name="TBQuantity" Grid.Row="2" Grid.Column="1"
+                             Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"
+                             Tag="От 1 до 1000" ToolTip="Количество: от 1 до 1000 шт."
+                             MaxLength="4" classes:InputMask.Mode="Digits"/>
+
+                    <TextBlock Grid.Row="3" Text="Цена за шт., руб. *" Style="{DynamicResource FieldLabel}"/>
+                    <TextBox x:Name="TBPrice" Grid.Row="3" Grid.Column="1"
+                             Text="{Binding UnitPrice, UpdateSourceTrigger=PropertyChanged}"
+                             Tag="Подставляется из карточки товара" ToolTip="Цена со скидкой на момент заказа"
+                             MaxLength="11" classes:InputMask.Mode="Decimal"/>
+
+                    <TextBlock x:Name="StockText" Grid.Row="4" Grid.Column="1" Style="{DynamicResource InfoText}"/>
+                </Grid>
+
+                <TextBlock Style="{DynamicResource InfoText}"
+                           Text="* — обязательные поля. При добавлении товар списывается со склада, сумма заказа пересчитывается."/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="ButtonSave" Content="Сохранить" Style="{DynamicResource MainButton}"
+                            ToolTip="Сохранить изменения" Click="ButtonSave_Click"/>
+                    <Button x:Name="ButtonClean" Content="Очистить" Style="{DynamicResource SecondaryButton}"
+                            ToolTip="Очистить поля формы" Click="ButtonClean_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</Page>

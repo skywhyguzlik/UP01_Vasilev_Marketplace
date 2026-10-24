@@ -1,0 +1,70 @@
+<Page x:Class="MarketplaceApp.Pages.AddOrderPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Заказ">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Border Style="{DynamicResource Card}" Width="720" Margin="20" HorizontalAlignment="Center">
+            <StackPanel>
+                <TextBlock x:Name="HeaderText" Style="{DynamicResource TitleText}" HorizontalAlignment="Center"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/><RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Покупатель *" Style="{DynamicResource FieldLabel}"/>
+                    <ComboBox x:Name="CBBuyer" Grid.Row="0" Grid.Column="1"
+                              DisplayMemberPath="FIO" SelectedValuePath="UserId" SelectedValue="{Binding BuyerId}"
+                              ToolTip="Пользователь с ролью «Покупатель»"/>
+
+                    <TextBlock Grid.Row="1" Text="Пункт выдачи *" Style="{DynamicResource FieldLabel}"/>
+                    <ComboBox x:Name="CBPickupPoint" Grid.Row="1" Grid.Column="1"
+                              DisplayMemberPath="FullAddress" SelectedValuePath="PickupPointId"
+                              SelectedValue="{Binding PickupPointId}" ToolTip="Куда доставить заказ"/>
+
+                    <TextBlock Grid.Row="2" Text="Статус *" Style="{DynamicResource FieldLabel}"/>
+                    <ComboBox x:Name="CBStatus" Grid.Row="2" Grid.Column="1"
+                              DisplayMemberPath="StatusName" SelectedValuePath="StatusId"
+                              SelectedValue="{Binding StatusId}" ToolTip="Текущий статус заказа"/>
+
+                    <TextBlock Grid.Row="3" Text="Способ оплаты *" Style="{DynamicResource FieldLabel}"/>
+                    <ComboBox x:Name="CBPayment" Grid.Row="3" Grid.Column="1"
+                              SelectedItem="{Binding PaymentMethod}" ToolTip="Как покупатель оплачивает заказ"/>
+
+                    <TextBlock Grid.Row="4" Text="Дата заказа *" Style="{DynamicResource FieldLabel}"/>
+                    <DatePicker x:Name="DPOrderDate" Grid.Row="4" Grid.Column="1"
+                                SelectedDate="{Binding OrderDate}" ToolTip="Дата оформления заказа"/>
+
+                    <TextBlock Grid.Row="5" Text="Дата доставки *" Style="{DynamicResource FieldLabel}"/>
+                    <DatePicker x:Name="DPDeliveryDate" Grid.Row="5" Grid.Column="1"
+                                SelectedDate="{Binding DeliveryDate}"
+                                ToolTip="Ожидаемая, а после получения — фактическая дата доставки"/>
+
+                    <TextBlock Grid.Row="6" Text="Комментарий" Style="{DynamicResource FieldLabel}"/>
+                    <TextBox x:Name="TBComment" Grid.Row="6" Grid.Column="1"
+                             Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}"
+                             Tag="Например: позвонить за час до доставки"
+                             ToolTip="Пожелания покупателя" MaxLength="255"/>
+
+                    <TextBlock Grid.Row="7" Text="Сумма заказа" Style="{DynamicResource FieldLabel}"/>
+                    <TextBlock x:Name="TotalText" Grid.Row="7" Grid.Column="1" Style="{DynamicResource SubTitleText}"
+                               ToolTip="Сумма считается автоматически по составу заказа"/>
+                </Grid>
+
+                <TextBlock x:Name="NoteText" Style="{DynamicResource InfoText}"
+                           Text="* — обязательные поля. Товары в заказ добавляются в таблице «Состав заказов»."/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="ButtonSave" Content="Сохранить" Style="{DynamicResource MainButton}"
+                            ToolTip="Сохранить изменения" Click="ButtonSave_Click"/>
+                    <Button x:Name="ButtonClean" Content="Очистить" Style="{DynamicResource SecondaryButton}"
+                            ToolTip="Очистить комментарий" Click="ButtonClean_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</Page>

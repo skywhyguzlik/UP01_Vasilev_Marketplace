@@ -1,0 +1,89 @@
+<Page x:Class="MarketplaceApp.Pages.AuthPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:classes="clr-namespace:MarketplaceApp.Classes"
+      Title="Авторизация">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Border Style="{DynamicResource Card}"
+                Width="460" Margin="20"
+                HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel>
+                <Image Source="/images/logo.png" Height="120" Margin="0,0,0,4"
+                       ToolTip="Маркетплейс товаров"/>
+                <TextBlock Text="Вход в систему" Style="{DynamicResource TitleText}"
+                           HorizontalAlignment="Center"/>
+
+                
+                <TextBlock x:Name="labelLogin" Text="Логин или e-mail" Style="{DynamicResource FieldLabel}"/>
+                <TextBox x:Name="TextBoxLogin"
+                         Tag="Введите логин или e-mail"
+                         ToolTip="Введите логин или почту"
+                         MaxLength="100"/>
+
+                <TextBlock x:Name="labelPass" Text="Пароль" Style="{DynamicResource FieldLabel}"/>
+                <Grid x:Name="PassGrid">
+                    <PasswordBox x:Name="PasswordBox"
+                                 ToolTip="Введите пароль"
+                                 MaxLength="50"
+                                 PasswordChanged="PasswordBox_PasswordChanged"/>
+                    <TextBlock x:Name="txtHintPass" Text="Введите пароль" Style="{DynamicResource HintText}"/>
+                </Grid>
+
+                
+                <TextBlock x:Name="labelCaptcha"
+                           Text="Капча: введите символы, которые видите ниже"
+                           Style="{DynamicResource FieldLabel}"
+                           Visibility="Collapsed"/>
+                <TextBox x:Name="captcha"
+                         CommandManager.PreviewExecuted="textBox_PreviewExecuted"
+                         ContextMenu="{x:Null}"
+                         Visibility="Collapsed"
+                         Height="56"
+                         Foreground="{DynamicResource BrushError}"
+                         FontStyle="Italic"
+                         FontWeight="Heavy"
+                         FontSize="28"
+                         FontStretch="UltraCondensed"
+                         TextDecorations="Strikethrough"
+                         IsReadOnly="True"
+                         Focusable="False"
+                         HorizontalContentAlignment="Center"
+                         ToolTip="Капча. Копировать её нельзя — введите вручную"/>
+                <TextBox x:Name="captchaInput"
+                         Visibility="Collapsed"
+                         Tag="Введите капчу"
+                         MaxLength="6"
+                         ToolTip="Введите символы капчи с учётом регистра"/>
+
+                <TextBlock x:Name="AttemptsText" Style="{DynamicResource InfoText}"
+                           HorizontalAlignment="Center"/>
+
+                
+                <StackPanel HorizontalAlignment="Center" Margin="0,6,0,0">
+                    <Button x:Name="ButtonEnter"
+                            Content="Вход"
+                            IsDefault="True"
+                            Style="{DynamicResource MainButton}"
+                            ToolTip="Войти в систему"
+                            Click="ButtonEnter_OnClick"/>
+                    <Button x:Name="submitCaptcha"
+                            Content="Подтвердить"
+                            Visibility="Collapsed"
+                            Style="{DynamicResource MainButton}"
+                            ToolTip="Подтвердить ввод капчи"
+                            Click="submitCaptcha_Click"/>
+                    <Button x:Name="ButtonReg"
+                            Content="Регистрация"
+                            Style="{DynamicResource SecondaryButton}"
+                            ToolTip="Создать новую учётную запись"
+                            Click="ButtonReg_Click"/>
+                    <Button x:Name="ButtonChangePassword"
+                            Content="Смена пароля"
+                            Style="{DynamicResource SecondaryButton}"
+                            ToolTip="Изменить пароль своей учётной записи"
+                            Click="ButtonChangePassword_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</Page>

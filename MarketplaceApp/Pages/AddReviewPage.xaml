@@ -1,0 +1,57 @@
+<Page x:Class="MarketplaceApp.Pages.AddReviewPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Отзыв">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Border Style="{DynamicResource Card}" Width="720" Margin="20" HorizontalAlignment="Center">
+            <StackPanel>
+                <TextBlock x:Name="HeaderText" Style="{DynamicResource TitleText}" HorizontalAlignment="Center"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Товар *" Style="{DynamicResource FieldLabel}"/>
+                    <ComboBox x:Name="CBProduct" Grid.Row="0" Grid.Column="1"
+                              DisplayMemberPath="ProductName" SelectedValuePath="ProductId"
+                              SelectedValue="{Binding ProductId}" ToolTip="Товар, о котором отзыв"/>
+
+                    <TextBlock Grid.Row="1" x:Name="UserLabel" Text="Автор *" Style="{DynamicResource FieldLabel}"/>
+                    <ComboBox x:Name="CBUser" Grid.Row="1" Grid.Column="1"
+                              DisplayMemberPath="FIO" SelectedValuePath="UserId"
+                              SelectedValue="{Binding UserId}" ToolTip="Покупатель, написавший отзыв"/>
+
+                    <TextBlock Grid.Row="2" Text="Оценка *" Style="{DynamicResource FieldLabel}"/>
+                    <ComboBox x:Name="CBRating" Grid.Row="2" Grid.Column="1"
+                              SelectedItem="{Binding Rating}" ToolTip="Оценка от 1 до 5"/>
+
+                    <TextBlock Grid.Row="3" Text="Текст отзыва *" Style="{DynamicResource FieldLabel}" VerticalAlignment="Top"/>
+                    <TextBox x:Name="TBText" Grid.Row="3" Grid.Column="1"
+                             Style="{DynamicResource MultiLineTextBox}"
+                             Text="{Binding ReviewText, UpdateSourceTrigger=PropertyChanged}"
+                             Tag="Расскажите, понравился ли товар" ToolTip="От 5 до 1000 символов" MaxLength="1000"/>
+
+                    <TextBlock Grid.Row="4" x:Name="DateLabel" Text="Дата отзыва *" Style="{DynamicResource FieldLabel}"/>
+                    <DatePicker x:Name="DPDate" Grid.Row="4" Grid.Column="1"
+                                SelectedDate="{Binding ReviewDate}" ToolTip="Дата отзыва"/>
+
+                    <CheckBox x:Name="CBPublished" Grid.Row="5" Grid.Column="1" Content="Отзыв опубликован"
+                              IsChecked="{Binding IsPublished}" ToolTip="Скрытые отзывы не видны покупателям"/>
+                </Grid>
+
+                <TextBlock Text="* — обязательные поля" Style="{DynamicResource InfoText}"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="ButtonSave" Content="Сохранить" Style="{DynamicResource MainButton}"
+                            ToolTip="Сохранить отзыв" Click="ButtonSave_Click"/>
+                    <Button x:Name="ButtonClean" Content="Очистить" Style="{DynamicResource SecondaryButton}"
+                            ToolTip="Очистить текст отзыва" Click="ButtonClean_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</Page>
